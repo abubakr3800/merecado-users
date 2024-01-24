@@ -290,6 +290,7 @@
           })
           .then((data) => {
             console.log("online");
+            document.getElementById("cards").innerHTML ="";
               for (const element of data) { // You can use `let` instead of `const` if you like
                   console.log(element['name']);
                   // urlsend = 'abubakr3800.github.io/merecado-qr/?' + element['url']
