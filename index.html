@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en" class="h-100" data-bs-theme="auto">
+  <head>
+    <script src="js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Cover Template · Bootstrap v5.3</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+
+      .v-cent{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="css/cover.css" rel="stylesheet">
+  </head>
+  <body class="text-center text-bg-dark" style="min-height: 100vh;">
+
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+  <main class="px-3 ">  
+    <div id="cards" class="p-auto">
+      <h1 class="d-inline-block px-3">Wait for getting data </h1>
+      <div class="spinner-border d-inline-block" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <form action="http://localhost/merecado/merecado-edit/" method="post" id="add-customer">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" name="name"  class="form-control" placeholder="Username" aria-label="customer name" aria-describedby="basic-addon1">
+              </div>
+              
+              <div class="input-group mb-3">
+                <input type="text" name="url" class="form-control" placeholder="redirected link" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <span class="input-group-text" id="basic-addon2">@example.com</span>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" form="add-customer" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p> -->
+  </main>
+</div>
+<footer class="mt-auto text-white-50">
+  <p>Cover for <a href="https://linktr.ee/mercato74" class="text-white">Merecado</a>, by <a href="http://abubakr.epizy.com" class="text-white">@abubakr</a>.</p>
+</footer>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+  function getSearchParameters() {
+      var prmstr = window.location.search.substr(1);
+      return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+  }
+
+  function transformToAssocArray( prmstr ) {
+      var params = {};
+      var prmarr = prmstr.split("&");
+      for ( var i = 0; i < prmarr.length; i++) {
+          var tmparr = prmarr[i].split("=");
+          params[tmparr[0]] = tmparr[1];
+      }
+      return params;
+  }
+
+  var params = getSearchParameters();
+  var ecdata;
+
+  function fetchGitJSONData() {
+      fetch("https://abubakr3800.github.io/merecado-qr/users.json")
+          .then((res) => {
+              if (!res.ok) {
+                  throw new Error
+                      (`HTTP error! Status: ${res.status}`);
+                      
+              }
+              return res.json();
+              
+          })
+          .then((data) => {
+              
+              fetchJSONData(data);
+          }
+                )
+          .catch((error) => 
+                 console.error("Unable to fetch data:", error));
+  }
+
+  var needupstate = [] ;
+
+  function fetchJSONData( ongit ) {
+      fetch("../merecado-qr/users.json")
+          .then((res) => {
+              if (!res.ok) {
+                  throw new Error
+                      (`HTTP error! Status: ${res.status}`);
+                      
+              }
+              return res.json();
+              
+          })
+          .then((data) => {
+              ecdata = data;
+              class NeedUpdate {
+                id;
+                name;
+                // link;
+                needstate;
+              }
+              for (const e of data) { // You can use `let` instead of `const` if you like
+                let objec = new NeedUpdate() ;
+                let objst = ongit.find( o => o.name == e['name'] );
+                console.log(objst != undefined);
+                objec['id'] = e['redid'];
+                objec['name'] = e['name'];
+                objec['needstate'] = (objst != undefined);
+                needupstate.push(objec);
+                  // createCards(element['name'],element['redid']);
+              }
+              console.log(ongit);
+              console.log(needupstate);
+              document.getElementById("cards").innerHTML = `<!-- Button trigger modal --><div class="d-grid gap-2">
+    <button type="button" class="m-3 btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      add customer
+    </button></div>`;
+              for (const element of needupstate) { // You can use `let` instead of `const` if you like
+                  console.log(element['name']);
+                  // urlsend = 'abubakr3800.github.io/merecado-qr/?' + element['url']
+                  
+                  createCards(element['name'],element['redid'],element['needstate']);
+              }
+          }
+                )
+          .catch((error) => 
+                 console.error("Unable to fetch data:", error));
+  }
+  
+
+  function createCards(name,id,state) {
+    var cardContainer = document.createElement("div");
+    cardContainer.setAttribute('class' , 'card mb-3 w-100');
+    // cardContainer.setAttribute('style' , 'max-width: 540px;');
+    var cardRow = document.createElement("div");
+    cardRow.setAttribute('class' , 'row g-0');
+    cardContainer.appendChild(cardRow);
+    var cardImgContainer = document.createElement("div");
+    cardImgContainer.setAttribute('class' , 'col-md-4');
+    cardRow.appendChild(cardImgContainer);
+    var cardImg = document.createElement("img");
+    cardImg.setAttribute('class' , 'img-fluid rounded-start');
+    cardImgLink = "https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=abubakr3800.github.io/merecado-qr/?id=" + id;
+    cardImg.setAttribute('src', cardImgLink);
+    var cardImgDownload = document.createElement("a");
+    cardImgDownload.setAttribute('href', cardImgLink);
+    cardImgDownload.appendChild(cardImg);
+    cardImgContainer.appendChild(cardImgDownload);
+    var cardBodyContainer = document.createElement("div");
+    cardBodyContainer.setAttribute('class' , "col-md-8 align-center-center");
+    cardRow.appendChild(cardBodyContainer);
+    var cardTitle = document.createElement("h5");
+    cardTitle.setAttribute('class' , 'card-title v-cent h-100');
+    cardTitle.innerHTML = "name is : " + name + "<br>the redirect link is : <a href=https://abubakr3800.github.io/merecado-qr/?id=" + id +" style='display:contents;'> click here</a>" + (state == false ? "<br><br> <p class='text-danger' style='display:contents;'>need to be uploaded</p>" : "");
+    cardBodyContainer.appendChild(cardTitle);
+    var cardText = document.createElement("p");
+    cardText.setAttribute('class' , 'cardText');
+    cardBodyContainer.appendChild(cardText);
+
+    document.getElementById("cards").appendChild(cardContainer);
+    return cardContainer;
+  }
+
+  function fetchGitJSONDataOnline() {
+      fetch("https://abubakr3800.github.io/merecado-qr/users.json")
+          .then((res) => {
+              if (!res.ok) {
+                  throw new Error
+                      (`HTTP error! Status: ${res.status}`);
+                      
+              }
+              return res.json();
+              
+          })
+          .then((data) => {
+            
+              for (const element of data) { // You can use `let` instead of `const` if you like
+                  console.log(element['name']);
+                  // urlsend = 'abubakr3800.github.io/merecado-qr/?' + element['url']
+                  
+                  createCards(element['name'],element['redid']);
+              }
+              fetchJSONData(data);
+          }
+                )
+          .catch((error) => 
+                 console.error("Unable to fetch data:", error));
+  }
+
+  if (window.location.host == 'localhost') {
+    fetchGitJSONData();
+
+  } else if ( window.location.host == 'abubakr3800.github.io') {
+    fetchGitJSONDataOnline();
+
+  }
+
+</script>
+    </body>
+</html>
