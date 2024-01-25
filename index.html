@@ -314,7 +314,7 @@
               }
               for (const e of data) { // You can use `let` instead of `const` if you like
                 let objec = new NeedUpdate() ;
-                let objst = ongit.find( o => o.redid == e['id'] );
+                let objst = ongit.find( o => o.redid == e['redid'] );
                 console.log(objst != undefined);
                 objec['id'] = e['redid'];
                 objec['name'] = e['name'];
@@ -451,7 +451,7 @@
       url: '../merecado-edit/togglestate.php',
       data: {id: usid},
       success: function(data) {
-        //success code
+        window.location.reload();
       }
     });
   }
