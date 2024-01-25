@@ -97,6 +97,69 @@
         justify-content: center;
         align-items: center;
       }
+
+      /* w3 schools added */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      /* w3 schools added */
+
     </style>
 
     
@@ -148,12 +211,46 @@
         </div>
       </div>
     </div>
+
+        <!-- Modal 2 -->
+        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="edituserLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+    
+                <form action="../merecado-edit/edit.php" method="post" id="edit-customer">
+                  <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">choose user name</label>
+                    <select name="id" class="form-select" id="users-links-list">
+                      <option selected>Choose...</option>
+                    </select>
+                  </div>
+                  
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon2">new url</span>
+                    <input type="text" name="url" class="form-control" placeholder="redirected link" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  </div>
+                </form>
+    
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="edit-customer" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
     <!-- <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p> -->
   </main>
 </div>
-<footer class="mt-auto text-white-50">
+<footer class=" py-3 text-white-50">
   <p>Cover for <a href="https://linktr.ee/mercato74" class="text-white">Merecado</a>, by <a href="http://abubakr.epizy.com" class="text-white">@abubakr</a>.</p>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
   function getSearchParameters() {
@@ -180,13 +277,12 @@
               if (!res.ok) {
                   throw new Error
                       (`HTTP error! Status: ${res.status}`);
-                      
               }
               return res.json();
               
           })
           .then((data) => {
-              
+              console.log(data);
               fetchJSONData(data);
           }
                 )
@@ -212,30 +308,40 @@
               class NeedUpdate {
                 id;
                 name;
-                // link;
+                link;
                 needstate;
+                dis;
               }
               for (const e of data) { // You can use `let` instead of `const` if you like
                 let objec = new NeedUpdate() ;
-                let objst = ongit.find( o => o.name == e['name'] );
+                let objst = ongit.find( o => o.redid == e['id'] );
                 console.log(objst != undefined);
                 objec['id'] = e['redid'];
                 objec['name'] = e['name'];
+                objec['link'] = e['url'];
+                objec['dis'] = e['s'];
                 objec['needstate'] = (objst != undefined);
                 needupstate.push(objec);
                   // createCards(element['name'],element['redid']);
               }
               console.log(ongit);
               console.log(needupstate);
-              document.getElementById("cards").innerHTML = `<!-- Button trigger modal --><div class="d-grid gap-2">
-    <button type="button" class="m-3 btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      add customer
-    </button></div>`;
+              document.getElementById("cards").innerHTML = `<!-- Button trigger modal -->
+                                                          <div  class="btn-group w-100 my-5" role="group" aria-label="Basic example" >
+                                                              <button type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                &#x270E; add customer
+                                                              </button>
+                                                              <button type="button" class="btn btn-primary btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#edituser">
+                                                                &#x270E; edit customer
+                                                              </button>
+                                                          </div>`;
               for (const element of needupstate) { // You can use `let` instead of `const` if you like
                   console.log(element['name']);
                   // urlsend = 'abubakr3800.github.io/merecado-qr/?' + element['url']
                   
-                  createCards(element['name'],element['id'],element['needstate']);
+                  createCards(element['name'],element['id'],element['link'],element['needstate'],element['dis']);
+                  createuser(element['id'],element['name'],element['link']);
+
               }
           }
                 )
@@ -244,36 +350,59 @@
   }
   
 
-  function createCards(name,id,state) {
+  function createCards(name,id,linked,state,s) {
     var cardContainer = document.createElement("div");
     cardContainer.setAttribute('class' , 'card mb-3 w-100');
     // cardContainer.setAttribute('style' , 'max-width: 540px;');
+    
     var cardRow = document.createElement("div");
     cardRow.setAttribute('class' , 'row g-0');
     cardContainer.appendChild(cardRow);
+
     var cardImgContainer = document.createElement("div");
     cardImgContainer.setAttribute('class' , 'col-md-4');
     cardRow.appendChild(cardImgContainer);
+
     var cardImg = document.createElement("img");
     cardImg.setAttribute('class' , 'img-fluid rounded-start');
+    cardImg.setAttribute('target' , '_blank');
     cardImgLink = "https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=abubakr3800.github.io/merecado-qr/?id=" + id;
     cardImg.setAttribute('src', cardImgLink);
+
     var cardImgDownload = document.createElement("a");
     cardImgDownload.setAttribute('href', cardImgLink);
+    cardImgDownload.setAttribute('target' , '_blank');
     cardImgDownload.appendChild(cardImg);
     cardImgContainer.appendChild(cardImgDownload);
+
     var cardBodyContainer = document.createElement("div");
     cardBodyContainer.setAttribute('class' , "col-md-8 align-center-center");
     cardRow.appendChild(cardBodyContainer);
+
+    var cardRowToggleText = document.createElement("div");
+    cardRowToggleText.setAttribute('class' , "row g-0 h-100");
+    cardBodyContainer.appendChild(cardRowToggleText);
+
+    var cardTextContainer = document.createElement("div");
+    cardTextContainer.setAttribute('class' , "col-md-10 text-start h-100");
+    cardRowToggleText.appendChild(cardTextContainer);
+
+    var cardToggleContainer = document.createElement("div");
+    cardToggleContainer.setAttribute('class' , "col-md-2 text-start h-100");
+    cardToggleContainer.innerHTML = `<div class="switches pt-2" ><label class="switch" ><input onclick="toggleUser('${id}')" ` + (s == true ? "checked" : "") + ` type="checkbox"><span class="slider"></span></label></div>`;
+    cardRowToggleText.appendChild(cardToggleContainer);
+
     var cardTitle = document.createElement("h5");
     cardTitle.setAttribute('class' , 'card-title v-cent h-100');
-    cardTitle.innerHTML = "name is : " + name + "<br>the redirect link is : <a href=https://abubakr3800.github.io/merecado-qr/?id=" + id +" style='display:contents;'> click here</a>" + (state == false ? "<br><br> <p class='text-danger' style='display:contents;'>need to be uploaded</p>" : "");
-    cardBodyContainer.appendChild(cardTitle);
+    cardTitle.innerHTML = "name is : " + name + "<br>link is : " + linked + "<br>the redirect link is : <a href=https://abubakr3800.github.io/merecado-qr/?id=" + id +" style='display:contents;'> click here</a>" + (state == false ? "<br><br> <p class='text-danger' style='display:contents;'>need to be uploaded</p>" : "") + ``;
+    cardTextContainer.appendChild(cardTitle);
+
     var cardText = document.createElement("p");
     cardText.setAttribute('class' , 'cardText');
-    cardBodyContainer.appendChild(cardText);
+    cardTextContainer.appendChild(cardText);
 
     document.getElementById("cards").appendChild(cardContainer);
+
     return cardContainer;
   }
 
@@ -283,10 +412,8 @@
               if (!res.ok) {
                   throw new Error
                       (`HTTP error! Status: ${res.status}`);
-                      
               }
               return res.json();
-              
           })
           .then((data) => {
             console.log("online");
@@ -294,8 +421,8 @@
               for (const element of data) { // You can use `let` instead of `const` if you like
                   console.log(element['name']);
                   // urlsend = 'abubakr3800.github.io/merecado-qr/?' + element['url']
-                  
                   createCards(element['name'],element['redid']);
+                  // createuser(element['redid'],element['name'],element['url']);
               }
           }
                 )
@@ -311,6 +438,23 @@
 
   }
 
+  function createuser(id,name,link) {
+    var userchild = document.createElement("option");
+    userchild.setAttribute("value" , id);
+    userchild.innerHTML = name;
+    document.getElementById("users-links-list").appendChild(userchild);
+  }
+
+  function toggleUser(usid) {
+    $.ajax({
+      type: 'POST',
+      url: '../merecado-edit/togglestate.php',
+      data: {id: usid},
+      success: function(data) {
+        //success code
+      }
+    });
+  }
 </script>
     </body>
 </html>
